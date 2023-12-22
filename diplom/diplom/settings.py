@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os.path
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,24 +21,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# import os
 
 
-# SECRET_KEY = 'SECRET_KEY'
-# SESSION_COOKIE_SECURE =True
-# CSRF_COOKIE_SECURE =True
 
-SECRET_KEY = 'django-insecure-2qlx^-3tw+c$fvxm58(_2*8xe381w!r7=^=5j!$ki4mtoi(y)%'
+SECRET_KEY = os.getenv('SECRET_KEY')
+SESSION_COOKIE_SECURE =True
+CSRF_COOKIE_SECURE =True
+
+# SECRET_KEY = 'django-insecure-2qlx^-3tw+c$fvxm58(_2*8xe381w!r7=^=5j!$ki4mtoi(y)%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
+DEBUG = False
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
-# ALLOWED_HOSTS = [
-#     'nikshgb.pythonanywhere.com',
-# ]
+ALLOWED_HOSTS = [
+    'nikshgb.pythonanywhere.com',
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
@@ -93,26 +94,26 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'nikshgb$default',
-#         'USER': 'nikshgb',
-#         'PASSWORD': os.getenv('MYSQL_PASSWORD'),
-#         'HOST': 'nikshgb.mysql.pythonanywhere-services.com',
-#         'OPTIONS': {
-#             'init_command': "SET NAMES 'utf8mb4';SET sql_mode='STRICT_TRANS_TABLES'",
-#             'charset': 'utf8mb4',
-#         }
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'nikshgb$default',
+        'USER': 'nikshgb',
+        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+        'HOST': 'nikshgb.mysql.pythonanywhere-services.com',
+        'OPTIONS': {
+            'init_command': "SET NAMES 'utf8mb4';SET sql_mode='STRICT_TRANS_TABLES'",
+            'charset': 'utf8mb4',
+        }
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -150,7 +151,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR/'static/'
+STATIC_ROOT = BASE_DIR/'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
